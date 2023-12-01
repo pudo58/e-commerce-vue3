@@ -1,8 +1,12 @@
 <script lang="tsx">
 import {defineComponent, ref, watch} from "vue";
+import {RouterLink} from "vue-router";
 
 export default defineComponent({
 	name: 'HeaderComponent',
+	components: {
+		RouterLink
+	},
 	props: {
 		showHeader: {
 			type: Boolean,
@@ -11,6 +15,21 @@ export default defineComponent({
 	},
 	setup(props) {
 		const isShow = ref(props.showHeader);
+		const homeUri = ['/', '/home', '/index'];
+		const productUri = ['/product', '/products'];
+		const aboutUri = ['/about'];
+		const contactUri = ['/contact'];
+
+		const activeMenu = (uri: string[]) => {
+			let currentUri = window.location.pathname;
+			let active = false;
+			uri.forEach((item) => {
+				if (currentUri === item) {
+					active = true;
+				}
+			});
+			return active;
+		};
 		const scrollHandler = () => {
 			let scroll = window.scrollY || document.documentElement.scrollTop;
 			let header = document.querySelector('header')?.offsetHeight || 0;
@@ -22,9 +41,7 @@ export default defineComponent({
 			}
 		};
 
-		// Thêm sự kiện scroll khi component được tạo
 		window.addEventListener('scroll', scrollHandler);
-
 		watch(isShow, (value) => {
 			console.log('isShow changed:', value);
 			if (value) {
@@ -47,19 +64,17 @@ export default defineComponent({
 								</button>
 								<div class="collapse navbar-collapse" id="navbarResponsive">
 									<ul class="navbar-nav ml-auto">
-										<li class="nav-item active">
-											<a class="nav-link" href="index.html">Home
-												<span class="sr-only">(current)</span>
-											</a>
+										<li class="nav-item" role="button">
+											<router-link to={"/home"} class={{'nav-link' : true,'active' : activeMenu(homeUri)}} id="home">Home</router-link>
 										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="products.html">Our Products</a>
+										<li class="nav-item" role="button">
+											<router-link to={"/products"} class={{'nav-link' : true,'active' : activeMenu(productUri)}} id="product">Product</router-link>
 										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="about.html">About Us</a>
+										<li class="nav-item" role="button">
+											<router-link to={"/about"} class={{'nav-link' : true,'active' : activeMenu(aboutUri)}} id="about">About Us</router-link>
 										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="contact.html">Contact Us</a>
+										<li class="nav-item" role="button">
+											<router-link to={"/contact"} class={{'nav-link' : true,'active' : activeMenu(contactUri)}} id="contact">Contact Us</router-link>
 										</li>
 									</ul>
 								</div>
@@ -69,7 +84,6 @@ export default defineComponent({
 				)}
 			</div>
 		)
-
 	}
 });
 </script>
@@ -94,17 +108,6 @@ header .navbar {
 	color: #121212 !important;
 }
 
-.background-header .navbar-nav a.nav-link {
-	color: #1e1e1e !important;
-}
-
-.background-header .navbar-nav .nav-link:hover,
-.background-header .navbar-nav .active > .nav-link,
-.background-header .navbar-nav .nav-link.active,
-.background-header .navbar-nav .nav-link.show,
-.background-header .navbar-nav .show > .nav-link {
-	color: #f33f3f !important;
-}
 
 .navbar .navbar-brand {
 	float: left;
@@ -149,17 +152,6 @@ header .navbar {
 	transition: all 0.5s;
 	margin-top: 5px;
 }
-
-.navbar .navbar-nav .nav-link:hover,
-.navbar .navbar-nav .active > .nav-link,
-.navbar .navbar-nav .nav-link.active,
-.navbar .navbar-nav .nav-link.show,
-.navbar .navbar-nav .show > .nav-link {
-	color: #fff;
-	padding-bottom: 25px;
-	border-bottom: 3px solid #f33f3f;
-}
-
 .navbar .navbar-toggler-icon {
 	background-image: none;
 }
@@ -169,7 +161,7 @@ header .navbar {
 	background-color: #fff;
 	height: 36px;
 	outline: none;
-	border-radius: 0px;
+	border-radius: 0;
 	position: absolute;
 	right: 30px;
 	top: 20px;
@@ -180,26 +172,12 @@ header .navbar {
 	color: #f33f3f;
 	font-size: 18px;
 	line-height: 26px;
-	font-family: 'FontAwesome';
-}
-
-@media (max-width: 768px) {
-	navbar-brand {
-		float: none;
-		font-size: 16px;
-	}
+	font-family: 'FontAwesome',serif;
 }
 
 @media (max-width: 768px) {
 	.navbar .navbar-nav .nav-item {
 		margin: 0px 5px;
-	}
-}
-
-@media (max-width: 468px) {
-	navbar-brand {
-		float: none;
-		font-size: 16px;
 	}
 }
 </style>

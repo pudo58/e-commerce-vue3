@@ -1,5 +1,6 @@
 <script lang="tsx">
 import {defineComponent} from "vue";
+import LoadingButtonComponent from "@/components/button/LoadingButtonComponent.vue";
 export default defineComponent({
 	name : 'BuyNowComponent',
 	setup(){
@@ -16,7 +17,7 @@ export default defineComponent({
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
 										</div>
 										<div class="col-md-4">
-											<a href="#" class="filled-button">Buy Now</a>
+											<LoadingButtonComponent text="Buy Now" loading={false}/>
 										</div>
 									</div>
 								</div>

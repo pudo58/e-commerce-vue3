@@ -1,8 +1,15 @@
 <script lang="tsx">
 import {defineComponent, ref} from "vue";
+import LoadingButtonComponent from "@/components/button/LoadingButtonComponent.vue";
 export default defineComponent({
 	name: 'AboutComponent',
+	components: {
+		LoadingButtonComponent
+	},
 	setup() {
+		const demo = () => {
+			console.log('demo');
+		}
 		return () => (
 			<div class="about-features">
 				<div class="best-features">
@@ -24,7 +31,7 @@ export default defineComponent({
 										<li><a href="#">Corporis, omnis doloremque</a></li>
 										<li><a href="#">Non cum id reprehenderit</a></li>
 									</ul>
-									<a href="about.html" class="filled-button">Read More</a>
+									<loading-button-component text="Read More" loading={false}/>
 								</div>
 							</div>
 							<div class="col-md-6">

@@ -1,25 +1,24 @@
 <script lang="tsx">
-import {defineComponent, ref} from "vue";
-import HeaderComponent from '@/components/header/Header.vue';
-import FooterComponent from '@/components/footer/Footer.vue';
-import ProductComponent from '@/components/product/ProductComponent.vue';
-import BannerComponent from '@/components/banner/BannerComponent.vue';
+import HeaderComponent from "@/components/header/Header.vue";
+import FooterComponent from "@/components/footer/Footer.vue";
+import {defineComponent, ref, watch} from "vue";
+import {ProductModel} from "@/base/model/ProductModel";
 import {PRODUCT_RESPONSIVE_CLASS} from "@/plugins/utils";
-import AboutComponent from "@/components/about/AboutComponent.vue";
-import BuyNowComponent from "@/components/buynow/BuyNowComponent.vue";
+import ProductComponent from "@/components/product/ProductComponent.vue";
+import PageComponent from "@/components/pages/PageComponent.vue";
 import LoadingComponent from "@/components/loading/LoadingComponent.vue";
+import LoadingButtonComponent from "@/components/button/LoadingButtonComponent.vue";
+
 export default defineComponent({
-	name : 'HomePage',
-	components : {
+	name: 'ProductPage',
+	components: {
 		HeaderComponent,
 		FooterComponent,
 		ProductComponent,
-		BannerComponent,
-		AboutComponent,
-		BuyNowComponent,
+		PageComponent,
 		LoadingComponent
 	},
-	setup(){
+	setup() {
 		const products = ref([
 			{
 				name: 'Product 1',
@@ -68,50 +67,82 @@ export default defineComponent({
 				imageThumbnail: 'src/assets/images/product_01.jpg',
 				rating: 4,
 				totalReviews: 12,
-			}]);
-		const loadingComponent = <LoadingComponent loading={true}/>
-
-		return () => (
-			<div class="container-fluid">
-				{loadingComponent}
-				<header-component/>
-				<banner-component/>
-				<div class="container ">
-					<div class="col-md-12 mt-3">
-						<div class="section-heading">
-							<h2>Latest Products</h2>
-							<a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
+			}] as ProductModel[]);
+		const headerImage = (
+			<div class="page-heading products-heading header-text">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="text-content">
+								<h4>new arrivals</h4>
+								<h2>sixteen products</h2>
+							</div>
 						</div>
 					</div>
-					<div class="row align-items-center">
-						{
-							products.value.map((product, index) => (
-								<product-component class={PRODUCT_RESPONSIVE_CLASS.four} product={product} key={index}/>
-							))
-						}
+				</div>
+			</div>
+		);
+		const loadingComponent = <LoadingComponent loading={true}/>
+		return () => (
+			<div>
+				{loadingComponent}
+				<header-component/>
+				{headerImage}
+				<div class="products">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="filters">
+									<ul>
+										<li class="active" data-filter="*">All Products</li>
+										<li data-filter=".des">Featured</li>
+										<li data-filter=".dev">Flash Deals</li>
+										<li data-filter=".gra">Last Minute</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="filters-content">
+									<div class="row grid">
+										{products.value?.map((item) => (
+											<product-component className={PRODUCT_RESPONSIVE_CLASS.three} key={item.name} product={item}/>
+										))}
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<page-component page={0} total-page={10} page-change={() => void(0)}/>
+							</div>
+						</div>
 					</div>
 				</div>
-				<about-component/>
-				<buy-now-component/>
-				<footer-component/>
+				<FooterComponent/>
 			</div>
 		)
 	}
 })
 </script>
 
-<style lang="css" scoped>
-.section-heading {
-	text-align: left;
-	margin-bottom: 60px;
+<style scoped lang="css">
+.products {
+	margin-top: 100px;
+}
+
+.filters {
+	text-align: center;
 	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+	margin-bottom: 60px;
 }
 
-.section-heading h2 {
-	font-size: 28px;
-	font-weight: 400;
-	color: #1e1e1e;
-	margin-bottom: 15px;
+.filters li {
+	text-transform: uppercase;
+	font-size: 13px;
+	font-weight: 700;
+	color: #121212;
+	display: inline-block;
+	margin: 0px 10px;
+	transition: all .3s;
+	cursor: pointer;
 }
-
 </style>
