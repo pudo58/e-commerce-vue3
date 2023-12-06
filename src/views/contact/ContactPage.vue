@@ -1,10 +1,12 @@
 <script lang="tsx">
-import {defineComponent} from "vue";
+import {defineComponent, reactive} from "vue";
 import HeaderComponent from "@/components/header/Header.vue";
 import LoadingButtonComponent from "@/components/button/LoadingButtonComponent.vue";
 import FooterComponent from "@/components/footer/Footer.vue";
 import {QuestionModel} from "@/base/model/QuestionModel";
 import LoadingComponent from "@/components/loading/LoadingComponent.vue";
+import {ContactModel} from "@/base/model/ContactModel";
+
 export default defineComponent({
 	name: 'ContactPage',
 	components: {
@@ -16,17 +18,17 @@ export default defineComponent({
 	setup() {
 		const questionDataLoader = [
 			{
-				id : "demo",
+				id: "demo",
 				question: 'Question 1',
 				answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.',
 			},
 			{
-				id : "demo1",
+				id: "demo1",
 				question: 'Question 2',
 				answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.',
 			},
 			{
-				id : "demo2",
+				id: "demo2",
 				question: 'Question 3',
 				answer: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.',
 			}
@@ -47,6 +49,18 @@ export default defineComponent({
 				</div>
 			</div>
 		);
+		let contactData = reactive({
+			fullName: '',
+			email: '',
+			subject: '',
+			message: ''
+		} as ContactModel);
+		const setValue = ($event: any) => {
+			contactData = {
+				...contactData,
+				[$event.target.id]: $event.target.value
+			}
+		};
 		const sendMessage = (
 			<div class="send-message">
 				<div class="container">
@@ -58,31 +72,31 @@ export default defineComponent({
 						</div>
 						<div class="col-md-8">
 							<div class="contact-form">
-								<form id="contact" action="" method="post" class='border-1'>
+								<form id="contact" class='border-1'>
 									<div class="row">
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<fieldset>
-												<input name="name" type="text" class="form-control" id="name" placeholder="Full Name"/>
+												<input onChange={($event) => setValue($event)} type="text" class="form-control" id="fullName" placeholder="Full Name"/>
 											</fieldset>
 										</div>
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<fieldset>
-												<input name="email" type="text" class="form-control" id="email" placeholder="E-Mail Address"/>
+												<input onChange={($event) => setValue($event)} type="email" class="form-control" id="email" placeholder="E-Mail Address"/>
 											</fieldset>
 										</div>
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<fieldset>
-												<input name="subject" type="text" class="form-control" id="subject" placeholder="Subject"/>
+												<input onChange={($event) => setValue($event)} type="text" class="form-control" id="subject" placeholder="Subject"/>
 											</fieldset>
 										</div>
 										<div class="col-lg-12">
 											<fieldset>
-												<textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message"></textarea>
+												<textarea onChange={($event) => setValue($event)} rows="6" class="form-control" id="message" placeholder="Your Message"></textarea>
 											</fieldset>
 										</div>
 										<div class="col-lg-12">
 											<fieldset>
-												<LoadingButtonComponent text="Send Message" loading={false}/>
+												<LoadingButtonComponent onclick={() => console.log(contactData)} text="Send Message" loading={false}/>
 											</fieldset>
 										</div>
 									</div>
@@ -94,7 +108,7 @@ export default defineComponent({
 								{questionDataLoader.map((item) => (
 									<li class="accordion-item">
 										<div class="accordion-header">
-											<a  class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${item.id}`} aria-expanded="false" aria-controls="flush-collapseOne">
+											<a class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#${item.id}`} aria-expanded="false" aria-controls="flush-collapseOne">
 												{item?.question}
 											</a>
 										</div>

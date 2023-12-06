@@ -7,18 +7,17 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig({
     plugins: [
         vue(),
-        vueJsx(),
+        vueJsx()
     ],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
-            'assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
         }
     },
     build: {
         outDir: 'dist',
         emptyOutDir: true,
-        sourcemap: true,
+        sourcemap: false,
         rollupOptions: {
             output: {
                 manualChunks: {
@@ -31,6 +30,6 @@ export default defineConfig({
             }
         },
         assetsDir: 'assets',
-        cssCodeSplit: true,
+        cssCodeSplit: true
     }
 })

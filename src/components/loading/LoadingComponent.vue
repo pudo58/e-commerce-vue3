@@ -9,7 +9,7 @@ export default defineComponent({
 		},
 		timeOut : {
 			type : Number,
-			default : 3
+			default : 1
 		}
 	},
 	setup(props){

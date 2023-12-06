@@ -19,6 +19,7 @@ export default defineComponent({
 		const productUri = ['/product', '/products'];
 		const aboutUri = ['/about'];
 		const contactUri = ['/contact'];
+		const cartUri = ['/cart'];
 
 		const activeMenu = (uri: string[]) => {
 			let currentUri = window.location.pathname;
@@ -64,17 +65,23 @@ export default defineComponent({
 								</button>
 								<div class="collapse navbar-collapse" id="navbarResponsive">
 									<ul class="navbar-nav ml-auto">
-										<li class="nav-item" role="button">
+										<li class="nav-item" role="button" title="home">
 											<router-link to={"/home"} class={{'nav-link' : true,'active' : activeMenu(homeUri)}} id="home">Home</router-link>
 										</li>
-										<li class="nav-item" role="button">
+										<li class="nav-item" role="button" title="product">
 											<router-link to={"/products"} class={{'nav-link' : true,'active' : activeMenu(productUri)}} id="product">Product</router-link>
 										</li>
-										<li class="nav-item" role="button">
+										<li class="nav-item" role="button" title="about">
 											<router-link to={"/about"} class={{'nav-link' : true,'active' : activeMenu(aboutUri)}} id="about">About Us</router-link>
 										</li>
-										<li class="nav-item" role="button">
+										<li class="nav-item" role="button" title="contact">
 											<router-link to={"/contact"} class={{'nav-link' : true,'active' : activeMenu(contactUri)}} id="contact">Contact Us</router-link>
+										</li>
+										<li class="nav-item" role="button" title="cart">
+											<router-link to={"/cart"} class={{'nav-link' : true,'active' : activeMenu(cartUri)}} id="cart">
+												<i class="bi bi-cart p-1"></i>
+												Cart
+											</router-link>
 										</li>
 									</ul>
 								</div>

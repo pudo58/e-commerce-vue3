@@ -1,15 +1,13 @@
 <script lang="tsx">
-import {defineComponent, ref} from "vue";
+import {defineComponent} from "vue";
 import LoadingButtonComponent from "@/components/button/LoadingButtonComponent.vue";
+
 export default defineComponent({
 	name: 'AboutComponent',
 	components: {
 		LoadingButtonComponent
 	},
 	setup() {
-		const demo = () => {
-			console.log('demo');
-		}
 		return () => (
 			<div class="about-features">
 				<div class="best-features">
@@ -23,7 +21,8 @@ export default defineComponent({
 							<div class="col-md-6">
 								<div class="left-content">
 									<h4>Looking for the best products?</h4>
-									<p><a rel="nofollow" href="https://github.com/pudo58" target="_blank">This template</a> is free by <b>pudo58</b></p>
+									<p><a rel="nofollow" href="https://github.com/pudo58" target="_blank">This
+										template</a> is free by <b>pudo58</b></p>
 									<ul class="featured-list">
 										<li><a href="#">Lorem ipsum dolor sit amet</a></li>
 										<li><a href="#">Consectetur an adipisicing elit</a></li>
@@ -51,7 +50,7 @@ export default defineComponent({
 <style>
 
 .about-features {
-	margin-top: 100px!important;
+	margin-top: 100px !important;
 }
 
 .about-features p {
@@ -60,8 +59,8 @@ export default defineComponent({
 }
 
 .about-features .container .row {
-	padding-bottom: 0px!important;
-	border-bottom: none!important;
+	padding-bottom: 0 !important;
+	border-bottom: none !important;
 }
 
 .best-features {
@@ -121,9 +120,4 @@ export default defineComponent({
 .best-features ul.featured-list li a:hover::before {
 	background-color: #f33f3f;
 }
-
-.best-features .filled-button {
-	margin-top: 20px;
-}
-
 </style>
