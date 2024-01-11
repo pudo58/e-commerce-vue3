@@ -5,4 +5,5 @@ export class TeamManagerModel {
     description?: string;
     facebook?: string;
     twitter?: string;
+    github?: string;
 }

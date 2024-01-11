@@ -28,11 +28,6 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.yellow {
-	color: #ffc107;
-}
-.dark {
-	color: #343a40;
-}
+<style scoped>
+@import "style.css";
 </style>

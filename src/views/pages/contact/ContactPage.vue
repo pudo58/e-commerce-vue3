@@ -1,11 +1,11 @@
 <script lang="tsx">
 import {defineComponent, reactive} from "vue";
-import HeaderComponent from "@/components/header/Header.vue";
+import HeaderComponent from "@/components/header/HeaderComponent.vue";
 import LoadingButtonComponent from "@/components/button/LoadingButtonComponent.vue";
-import FooterComponent from "@/components/footer/Footer.vue";
-import {QuestionModel} from "@/base/model/QuestionModel";
+import FooterComponent from "@/components/footer/FooterComponent.vue";
+import {QuestionModel} from "@/base/model/question.model";
 import LoadingComponent from "@/components/loading/LoadingComponent.vue";
-import {ContactModel} from "@/base/model/ContactModel";
+import {ContactModel} from "@/base/model/contact.model";
 
 export default defineComponent({
 	name: 'ContactPage',
@@ -135,10 +135,11 @@ export default defineComponent({
 						</div>
 						<div class="col-md-8">
 							<div id="map">
-								<iframe
-									src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
-									width="100%" height="330px" style="border:0"
-									allowfullscreen></iframe>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d238893.92637309415!2d106.1892875522188!3d20.681065075333105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31358ac52731c375%3A0x8d3283fc01cc9bf!2zVsSpbmggQuG6o28sIEjhuqNpIFBow7JuZywgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1704857951149!5m2!1svi!2s"
+                                    width="100%"
+                                    height="330px" style="border:0"
+                                    allowfullscreen></iframe>
 							</div>
 						</div>
 						<div class="col-md-4">

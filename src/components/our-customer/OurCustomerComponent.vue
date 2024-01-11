@@ -38,26 +38,5 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.happy-clients {
-	margin-top: 100px;
-	margin-bottom: 40px;
-}
-
-.happy-clients .client-item img {
-	max-width: 100%;
-	overflow: hidden;
-	transition: all .3s;
-	cursor: pointer;
-}
-
-.happy-clients .client-item img:hover {
-	opacity: 0.8;
-}
-
-@media (max-width: 767px) {
-	.happy-clients .client-item img {
-		max-width: 80%;
-	}
-}
-
+@import "style.css";
 </style>

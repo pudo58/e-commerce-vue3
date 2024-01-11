@@ -33,20 +33,6 @@ export default defineComponent({
 })
 </script>
 
-<style>
-.loading {
-	background: rgba(0, 0, 0, .5);
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 999;
-}
-
-.spinner-center {
-	top: 50%;
-	left: 50%;
-	position: absolute;
-}
+<style scoped>
+@import "style.css";
 </style>

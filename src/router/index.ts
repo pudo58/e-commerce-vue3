@@ -5,31 +5,35 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            component: () => import('@/views/home/HomePage.vue')
+            component: () => import('@/views/pages/home/HomePage.vue')
         },
         {
             path: '/home',
-            component: () => import('@/views/home/HomePage.vue')
+            component: () => import('@/views/pages/home/HomePage.vue')
         },
         {
             path: '/index',
-            component: () => import('@/views/home/HomePage.vue')
+            component: () => import('@/views/pages/home/HomePage.vue')
         },
         {
             path: '/about',
-            component: () => import('@/views/about/AboutPage.vue')
+            component: () => import('@/views/pages/about/AboutPage.vue')
         },
         {
             path: '/contact',
-            component: () => import('@/views/contact/ContactPage.vue')
+            component: () => import('@/views/pages/contact/ContactPage.vue')
         },
         {
             path: '/products',
-            component: () => import('@/views/product/ProductPage.vue')
+            component: () => import('@/views/pages/product/ProductPage.vue')
         },
         {
             path: '/cart',
-            component: () => import('@/views/cart/CartPage.vue'),
+            component: () => import('@/views/pages/cart/CartPage.vue'),
+        },
+        {
+            path: '/login',
+            component: () => import('@/views/pages/login/LoginPage.vue'),
         }
     ]
 })
