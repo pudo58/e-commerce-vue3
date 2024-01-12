@@ -19,7 +19,6 @@ export default defineComponent({
 	setup(props, {emit}) {
 		const product = ref(props.product);
         const addToCart = () => {
-            alert('add to cart');
             emit('add-to-cart', product.value);
         }
 		return () => (
