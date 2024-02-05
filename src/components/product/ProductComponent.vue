@@ -4,6 +4,7 @@ import {ProductModel} from "@/base/model/product.model";
 import RatingComponent from "@/components/rating/RatingComponent.vue";
 import formatMoney from "@/plugins/utils";
 import DialogComponent from "@/components/dialog/DialogComponent.vue";
+import {toast} from 'vue3-toastify';
 
 export default defineComponent({
     name: 'ProductComponent',
@@ -25,6 +26,7 @@ export default defineComponent({
             emit('add-to-cart', product.value);
             localStorage.setItem('cart', JSON.stringify(product.value)); // TODO: remove this line when call api
             show.value = true;
+            toast.success('Add to cart success');
         }
         return () => (
             <div>
