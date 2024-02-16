@@ -1,6 +1,6 @@
 <script lang="tsx">
 import {defineComponent, ref} from "vue";
-import {ProductModel} from "@/base/model/product.model";
+import {ProductCard} from "@/base/model/product.model";
 import RatingComponent from "@/components/rating/RatingComponent.vue";
 import formatMoney from "@/plugins/utils";
 import DialogComponent from "@/components/dialog/DialogComponent.vue";
@@ -14,8 +14,8 @@ export default defineComponent({
     },
     props: {
         product: {
-            type: ProductModel,
-            default: () => new ProductModel(),
+            type: ProductCard,
+            default: () => new ProductCard(),
             required: true
         }
     },
@@ -31,16 +31,16 @@ export default defineComponent({
         return () => (
             <div>
                 <div class="product-card border-1 mb-7">
-                    <div role="button" title={product.value?.name} class="product-image"
-                         style={{"background-image": 'url(' + product.value?.imageThumbnail + ')'}}></div>
+                    <div role="button" title={product.value?.title} class="product-image"
+                         style={{"background-image": 'url(' + product.value?.image + ')'}}></div>
                     <div class="product-info">
-                        <div class="product-title">{product.value?.name}</div>
+                        <div class="product-title limit-line-1">{product.value?.title}</div>
                         <div class="product-price">{formatMoney(product.value?.price)}</div>
                         <div class="product-description limit-line-2">{product.value?.description}</div>
                         <div class="product-rating d-flex">
                             <div>
-                                <rating-component rating={product.value?.rating}/>
-                                <span class="total-reviews">({product.value?.totalReviews} reviews)</span>
+                                <rating-component rating={product.value?.rating?.rate}/>
+                                <span class="total-reviews">({product.value?.rating?.count} reviews)</span>
                             </div>
                             <div class="ml-auto">
                                 <v-btn onClick={addToCart} title="add to cart" density="default"
@@ -57,5 +57,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "style.scss";
+@import "style";
 </style>

@@ -16,7 +16,7 @@ export default defineComponent({
 	setup(props) {
 		const isShow = ref(props.showHeader);
 		const homeUri = ['/', '/home', '/index'];
-		const productUri = ['/product', '/products'];
+		const productUri = ['/product', '/products', '/product/:id'];
 		const aboutUri = ['/about'];
 		const contactUri = ['/contact'];
 		const cartUri = ['/cart'];
@@ -69,7 +69,7 @@ export default defineComponent({
 											<router-link to={"/home"} class={{'nav-link' : true,'active' : activeMenu(homeUri)}} id="home">Home</router-link>
 										</li>
 										<li class="nav-item" role="button" title="product">
-											<router-link to={"/products"} class={{'nav-link' : true,'active' : activeMenu(productUri)}} id="product">Product</router-link>
+											<router-link to={"/product"} class={{'nav-link' : true,'active' : activeMenu(productUri)}} id="product">Product</router-link>
 										</li>
 										<li class="nav-item" role="button" title="about">
 											<router-link to={"/about"} class={{'nav-link' : true,'active' : activeMenu(aboutUri)}} id="about">About Us</router-link>

@@ -1,9 +1,11 @@
-export class ProductModel {
+export class ProductCard {
     id?: number;
-    name?: string;
+    title?: string;
     price?: number;
     description?: string;
-    imageThumbnail?: string;
-    totalReviews?: number;
-    rating?: number;
+    image?: string;
+    rating?: {
+        rate: number;
+        count: number;
+    }
 }

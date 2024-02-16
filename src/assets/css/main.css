@@ -4,6 +4,13 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+.limit-line-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Số dòng hiển thị */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 body {
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;

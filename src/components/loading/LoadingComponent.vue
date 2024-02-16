@@ -23,7 +23,7 @@ export default defineComponent({
 				{loadingProps.value && (
 					<div class="loading">
 						<div class="spinner-border spinner-center" role="status">
-							<span class="sr-only">Loading...</span>
+							<span class="sr-only">...</span>
 						</div>
 					</div>
 				)}
@@ -33,6 +33,6 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style scoped lang="css">
 @import "style.css";
 </style>

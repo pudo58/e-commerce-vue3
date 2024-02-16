@@ -83,10 +83,10 @@
                         </div>
                         <div>
                             <div class="filters-content">
-                                <div class="row grid">
+                                <div class="row grid" v-if="productList && productList.length > 0">
                                     <product-component
-                                        v-for="product in products"
-                                        :key="product.name"
+                                        v-for="product in productList"
+                                        :key="product.title"
                                         :class="PRODUCT_RESPONSIVE_CLASS.four"
                                         :product="product"
                                     />
@@ -108,12 +108,13 @@
 <script lang="ts">
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 import FooterComponent from "@/components/footer/FooterComponent.vue";
-import {defineComponent, reactive} from "vue";
-import {ProductModel} from "@/base/model/product.model";
+import {defineComponent} from "vue";
+import {ProductCard} from "@/base/model/product.model";
 import {PRODUCT_RESPONSIVE_CLASS} from "@/plugins/utils";
 import ProductComponent from "@/components/product/ProductComponent.vue";
 import PageComponent from "@/components/pages/PageComponent.vue";
 import LoadingComponent from "@/components/loading/LoadingComponent.vue";
+import {ProductService} from "@/base/service/product.service";
 
 export default defineComponent({
     name: 'ProductPage',
@@ -129,58 +130,20 @@ export default defineComponent({
             brandIdListSelected: [],
             categoryIdListSelected: [],
             priceRangeListSelected: [],
+            productList: [] as ProductCard[]
         }
     },
+    methods: {
+        async getProductList() {
+            const productService = new ProductService();
+            const res = await productService.findAll();
+            this.productList = res;
+        }
+    },
+    mounted() {
+        this.getProductList();
+    },
     setup() {
-        const products = reactive([
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 1,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 4,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 5,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 3,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 4,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 4,
-                totalReviews: 12,
-            }] as ProductModel[]);
         const categoryList = [
             {id: 1, name: 'Category 1'},
             {id: 2, name: 'Category 2'},
@@ -203,7 +166,6 @@ export default defineComponent({
             {value: 5, label: 'Price 5'},
         ];
         return {
-            products,
             categoryList,
             brandList,
             priceRanges,

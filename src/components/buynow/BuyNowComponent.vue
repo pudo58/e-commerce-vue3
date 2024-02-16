@@ -31,6 +31,6 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style scoped lang="css">
 @import "style.css";
 </style>

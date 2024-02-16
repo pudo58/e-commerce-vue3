@@ -30,6 +30,7 @@ const options = {
     rtl: false,
 };
 const app = createApp(App)
+axios.defaults.baseURL = 'http://localhost:3000/api';
 app.use(router)
     .use(vuetify)
     .use(Vue3Toast, options)
