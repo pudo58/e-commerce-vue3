@@ -8,6 +8,8 @@ import {PRODUCT_RESPONSIVE_CLASS} from "@/plugins/utils";
 import AboutComponent from "@/components/about/AboutComponent.vue";
 import BuyNowComponent from "@/components/buynow/BuyNowComponent.vue";
 import LoadingComponent from "@/components/loading/LoadingComponent.vue";
+import {ProductService} from "@/base/service/product.service";
+import type {ProductCard} from "@/base/model/product.model";
 
 export default defineComponent({
     name: 'HomePage',
@@ -21,55 +23,13 @@ export default defineComponent({
         LoadingComponent
     },
     setup() {
-        const products = ref([
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 1,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 4,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 5,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 3,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 4,
-                totalReviews: 12,
-            },
-            {
-                name: 'Product 1',
-                price: 100,
-                description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!',
-                imageThumbnail: 'src/assets/images/product_01.jpg',
-                rating: 4,
-                totalReviews: 12,
-            }]);
+        const productList = ref([]);
+
+        const productService = new ProductService();
+        productService.findAll().then(res => {
+            productList.value = res;
+        });
+
         const loadingComponent = <LoadingComponent loading={true}/>
 
         return () => (
@@ -81,12 +41,13 @@ export default defineComponent({
                     <div class="col-md-12 mt-3">
                         <div class="section-heading">
                             <h2>Latest Products</h2>
-                            <router-link to="/products">view all products <i class="fa fa-angle-right"></i></router-link>
+                            <router-link to="/products">view all products <i class="fa fa-angle-right"></i>
+                            </router-link>
                         </div>
                     </div>
                     <div class="row align-items-center">
                         {
-                            products.value.map((product, index) => (
+                            productList.value.map((product, index) => (
                                 <product-component class={PRODUCT_RESPONSIVE_CLASS.four} product={product} key={index}/>
                             ))
                         }

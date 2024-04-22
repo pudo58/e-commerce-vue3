@@ -22,7 +22,11 @@ export default defineComponent({
 					<v-carousel>
 						{carousel.value?.map((item,index) => (
 							<v-carousel-item key={index}>
-								<img src={item} alt={`Carousel Item ${index + 1}`} />
+                                <v-img
+                                aspect-ratio="16/9"
+                                cover={true}
+                                src={item}
+                                ></v-img>
 							</v-carousel-item>
 						))}
 					</v-carousel>
