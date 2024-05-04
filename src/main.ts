@@ -1,4 +1,4 @@
-import {createApp} from 'vue';
+import {createApp, provide} from 'vue';
 import App from './App.vue';
 import router from './router';
 import 'vue3-toastify/dist/index.css';
@@ -10,11 +10,12 @@ import './assets/css/flex-slider.css';
 import './assets/css/templatemo-sixteen.css';
 import './assets/css/main.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
+import {DependencyInjection} from "@/dj";
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vuetify from '@/plugins/vuetify';
 import Vue3Toast, { toast } from 'vue3-toastify';
+import {ProductService} from "@/base/service/product.service";
 const options = {
     position: 'bottom-right',
     timeout: 3000,
@@ -34,6 +35,7 @@ axios.defaults.baseURL = 'http://localhost:3000/api';
 app.use(router)
     .use(vuetify)
     .use(Vue3Toast, options)
+    .use(DependencyInjection)
     .use(VueAxios, axios)
     .mount('#app');
 app.config.globalProperties.$toast = toast;

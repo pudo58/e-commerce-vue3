@@ -1,5 +1,5 @@
 <script lang="tsx">
-import {defineComponent, ref} from "vue";
+import {defineComponent, inject, ref} from "vue";
 import HeaderComponent from '@/components/header/HeaderComponent.vue';
 import FooterComponent from '@/components/footer/FooterComponent.vue';
 import ProductComponent from '@/components/product/ProductComponent.vue';
@@ -23,13 +23,13 @@ export default defineComponent({
         LoadingComponent
     },
     setup() {
-        const productList = ref([]);
+        const productList = ref([] as ProductCard[]);
 
-        const productService = new ProductService();
+        const productService = inject('productService') as ProductService;
         productService.findAll().then(res => {
             productList.value = res;
         });
-
+        console.log(1,productService)
         const loadingComponent = <LoadingComponent loading={true}/>
 
         return () => (
